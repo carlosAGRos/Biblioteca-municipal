@@ -10,7 +10,8 @@ export class Leitor {
     
     set idade (idade) {
     if (idade < 12) {
-        throw new error("[BLOQUEIO] Leitor menor de 12 anos precisa do responsável para o cadastro")
+        throw new error("[BLOQUEIO] Leitor menor de 12 anos precisa do responsável para o cadastro");
+        return;
     }
     }
 }
