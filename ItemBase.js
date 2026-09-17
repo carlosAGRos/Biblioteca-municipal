@@ -1,4 +1,4 @@
-import { error } from "node:console";
+
 
 export class ItemBase {
     #anoPublicacao;
