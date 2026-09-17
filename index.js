@@ -45,9 +45,9 @@ let livro;
             console.log("\n [ERRO]: Titulo de livro ou autor não identificados. ");
         }
         else {
-            console.log("\n================================");
+            console.log("\n==================================");
             console.log("===== Etiqueta de Empréstimo =====")
-            console.log("================================");
+            console.log("==================================");
             console.log(`Titulo do livro: ${livro.titulo}`);
             console.log(`Autor do livro: ${livro.autor}`);
             console.log(`Ano de Publicacao: ${livro.anoPublicacao}`);
