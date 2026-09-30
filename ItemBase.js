@@ -1,5 +1,3 @@
-
-
 export class ItemBase {
     #anoPublicacao;
 
@@ -9,19 +7,22 @@ export class ItemBase {
         }
         this.titulo = titulo;
         this.autor = autor;
-        this.anoPublicacao = anoPublicacao;
+        this.cadastrarLivro(anoPublicacao);
     }
     get anoPublicacao () {return this.#anoPublicacao;}
 
-    set anoPublicacao(dataPublicacao) {
-        this.#anoPublicacao = dataPublicacao;
+    cadastrarLivro(dataPublicacao) {
+       
     if (dataPublicacao < 1000 || dataPublicacao > 2026) {
-        throw new error("[BLOQUEIO] O ano de publicação não pode ser menor que 1000! ");
+        throw new Error("ERR_ANO_FORA_DO_LIMITE");
     
     }
-    
+    if (typeof dataPublicacao !=='number' || isNaN(dataPublicacao)){
+        throw new Error("ERR_TIPO_ANO_INVALIDO");
     }
-
+     this.#anoPublicacao = dataPublicacao;
+    }
+     
     calcularMulta(diasAtraso) {
         throw new error("[ERRO] A classe filha precisa implementar o cálculo de multa! ");
     }

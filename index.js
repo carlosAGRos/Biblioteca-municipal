@@ -2,17 +2,17 @@ import * as readline from 'node:readline/promises';
 import { stdin as input, stdout as output } from 'node:process';
 import {LivroFisico, Ebook } from './TiposDeltens.js';  
 import {Leitor } from './Leitor.js';
+import { AtendimentoBiblioteca } from './AtendimentoBiblioteca.js';
 const rl = readline.createInterface ({ input, output });
 
 (async function iniciarSistema(){
 let livro;
+const guiche = new AtendimentoBiblioteca();
     console.log("=== SISTEMA DE CADASTRO DE ITENS ===");
     
-    const nome = await rl.question("Digite o nome do leitor: ");
-    const idade = parseInt (await rl.question("Digite a idade do leitor: ")
-    );
+    
+    
 
-    const leitor = new Leitor(nome, idade);
     console.log("\nEscolha o item que quer cadastrar: ");
     console.log(" 1 - Livro Físico ");
     console.log(" 2 - E-book ");
@@ -23,14 +23,21 @@ let livro;
         const autor = await rl.question("Digite o nome do autor: ");
         const anoPublicacao = Number(await rl.question("Digite o ano de publicação: "));
 
-        switch (tipoLivro) {
-            case "1":
-                const corredor = await rl.question("Digite o corredor: ");
-                livro = new LivroFisico(titulo, autor, anoPublicacao, corredor);
-                break;
-            case "2":
-                const formatoArquivo = await rl.question("Digite o formato do arquivo (PDF, EPUB, MOBI...): ");
-                livro = new Ebook(titulo, autor, anoPublicacao, formatoArquivo);
+     try {
+            switch (tipoLivro) {
+                case "1":
+                    const corredor = await rl.question("Digite o corredor: ");
+                    livro = new LivroFisico(titulo, autor, anoPublicacao, corredor);
+                    break;
+                case "2":
+                    const formatoArquivo = await rl.question("Digite o formato do arquivo (PDF, EPUB, MOBI...): ");
+                    livro = new Ebook(titulo, autor, anoPublicacao, formatoArquivo);
+            }
+        } catch (erro) {
+            console.log("\n[ERRO INTERCEPTADO] O item não pôde ser cadastrado.");
+            guiche.traduzirCodigoDeErro(erro.message);
+            rl.close();
+            return;
         }
     }
         else {
@@ -53,6 +60,10 @@ let livro;
             console.log(`Ano de Publicacao: ${livro.anoPublicacao}`);
             console.log(`\n Valor da multa por atraso:: R$ ${valorMulta.toFixed(2)}`);
         }
+        
+        guiche.cadastrarNovoLeitor("Carlos", "Dez");
+        guiche.cadastrarNovoLeitor("Carlos", 10);  
+        guiche.cadastrarNovoLeitor("Carlos", 25);    
 
       rl.close();  
     }
