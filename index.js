@@ -9,9 +9,6 @@ const rl = readline.createInterface ({ input, output });
 let livro;
 const guiche = new AtendimentoBiblioteca();
     console.log("=== SISTEMA DE CADASTRO DE ITENS ===");
-    
-    
-    
 
     console.log("\nEscolha o item que quer cadastrar: ");
     console.log(" 1 - Livro Físico ");
